@@ -1,0 +1,11 @@
+c:\Users\forz\documents\visual studio 2015\Projects\TodoList\TodoList.lib\bin\Debug\TodoList.lib.dll.config
+c:\Users\forz\documents\visual studio 2015\Projects\TodoList\TodoList.lib\bin\Debug\TodoList.lib.dll
+c:\Users\forz\documents\visual studio 2015\Projects\TodoList\TodoList.lib\bin\Debug\TodoList.lib.pdb
+c:\Users\forz\documents\visual studio 2015\Projects\TodoList\TodoList.lib\bin\Debug\EntityFramework.dll
+c:\Users\forz\documents\visual studio 2015\Projects\TodoList\TodoList.lib\bin\Debug\EntityFramework.SqlServer.dll
+c:\Users\forz\documents\visual studio 2015\Projects\TodoList\TodoList.lib\bin\Debug\EntityFramework.xml
+c:\Users\forz\documents\visual studio 2015\Projects\TodoList\TodoList.lib\bin\Debug\EntityFramework.SqlServer.xml
+c:\Users\forz\documents\visual studio 2015\Projects\TodoList\TodoList.lib\bin\Debug\ru\EntityFramework.resources.dll
+c:\Users\forz\documents\visual studio 2015\Projects\TodoList\TodoList.lib\obj\Debug\TodoList.lib.csprojResolveAssemblyReference.cache
+c:\Users\forz\documents\visual studio 2015\Projects\TodoList\TodoList.lib\obj\Debug\TodoList.lib.dll
+c:\Users\forz\documents\visual studio 2015\Projects\TodoList\TodoList.lib\obj\Debug\TodoList.lib.pdb
