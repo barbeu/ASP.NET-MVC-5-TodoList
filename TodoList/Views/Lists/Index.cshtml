@@ -11,14 +11,59 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/Styles.css" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
 </head>
 <body>
-    <div> 
-        @foreach(tbLists item in Model)
-        {
-            @Html.Label(item.cName);
-            <br />
-        }
+    <div class="panel-primary">
+        <div class="panel-heading text-center">
+            <h1>TODO LIST</h1>
+        </div>
+            <div class="panel-body">
+                @if (Model.Count != 0)
+                {
+                    <table class="table">
+                        <tr>
+                            <td align="left">
+                                @using (Html.BeginRouteForm("Default", new { action = "CreateTask", controller = "Lists" }))
+                                {                                   
+                                    @Html.Label("Name");                                    
+                                    @Html.TextBox("names")
+                                    <input type="submit" class="btn btn-primary" value="+" />
+                                }
+                            </td>                                                        
+                        </tr>                        
+                        <tr>
+                            <td align="center">
+                                <h3>
+                                    Tasks
+                                </h3>
+                            </td>
+                        </tr>
+                       
+                        @foreach (tbLists item in Model)
+                        {
+                            if (item.isDone == true) { continue; }
+                            <tr>
+                                <td align="center">
+                                    @item.cName
+                                </td>
+                                <td>
+                                    <!-- TODO: button done -->
+                                </td>
+                                <td >
+                                    <!-- TODO: button delete -->
+                                </td>
+                            </tr>
+                            }
+                    </table>                   
+                }
+                else
+                {
+                    <h2>No Data</h2>
+                }          
+        </div>
     </div>
 </body>
 </html>

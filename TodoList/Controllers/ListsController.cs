@@ -16,10 +16,26 @@ namespace TodoList.Controllers
             dbContext = new dbTodoListEntities();
         }
 
-        //GET: Lists
         public ActionResult Index()
         {
             return View(dbContext.tbLists.ToList());
+        }
+
+        [HttpPost]
+        public ActionResult CreateTask(List<string> names)
+        {
+            foreach(string name in names)
+            {
+                tbLists tmp = new tbLists();
+                tmp.cName = name;
+                tmp.isDone = false;
+                dbContext.tbLists.Add(tmp);
+            }
+           
+            dbContext.SaveChanges();
+            ModelState.Clear();
+
+            return View("Index", dbContext.tbLists.ToList());
         }
     }
 }
