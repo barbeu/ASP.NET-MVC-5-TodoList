@@ -33,14 +33,23 @@ namespace TodoList.Controllers
 
                 dbContext.SaveChanges();
             }
-            
+
             return Redirect("/Lists/Index");
         }
 
         [HttpPost]
         public RedirectResult Done(int id)
-        {        
+        {
             dbContext.tbLists.Where(l => l.id == id).First().isDone = true;
+            dbContext.SaveChanges();
+
+            return Redirect("/Lists/Index");
+        }
+
+        [HttpPost]
+        public RedirectResult DeleteTask(int id)
+        {
+            dbContext.tbLists.Remove(dbContext.tbLists.Where(l => l.id == id).First());
             dbContext.SaveChanges();
 
             return Redirect("/Lists/Index");

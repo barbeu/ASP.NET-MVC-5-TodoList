@@ -49,15 +49,19 @@
                                 <td align="center">
                                     @item.cName
                                 </td>
-                                <td>
+                                <td align="right">
                                     @using (Html.BeginRouteForm("Default", new { action = "Done", controller = "Lists" }))
                                     {
-                                        @Html.Hidden("id", @item.id);                                                                         
+                                        @Html.Hidden("id", @item.id)                                                                        
                                         <input type="submit" class="btn btn-success" value="✔"/>
                                     }
                                 </td>
-                                <td >
-                                    <!-- TODO: button delete -->
+                                <td align="left">
+                                    @using (Html.BeginRouteForm("Default", new { action = "DeleteTask", controller = "Lists" }))
+                                    {
+                                        @Html.Hidden("id", @item.id)
+                                        <input type="submit" class="btn btn-danger" value="X" />
+                                    }
                                 </td>
                             </tr>
                             }
