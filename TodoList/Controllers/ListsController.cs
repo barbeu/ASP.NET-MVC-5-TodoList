@@ -67,5 +67,21 @@ namespace TodoList.Controllers
 
             return Redirect("/Lists/Index");
         }
+
+        [HttpPost]
+        public RedirectResult RemoveTasks (bool boolean)
+        {
+            if(dbContext.tbLists.Where(l => l.isDone == boolean).Count() > 0)
+            {
+                if (dbContext.tbLists.Where(l => l.isDone == boolean).Count() > 1)
+                    dbContext.tbLists.RemoveRange(dbContext.tbLists.Where(l => l.isDone == boolean).ToList());
+                else
+                    dbContext.tbLists.Remove(dbContext.tbLists.Where(l => l.isDone == boolean).FirstOrDefault());
+
+                dbContext.SaveChanges();
+            }
+
+            return Redirect("/Lists/Index");
+        }
     }
 }
