@@ -18,15 +18,14 @@
 <body>
     <div class="panel-primary">
         <div class="panel-heading text-center">
-            <h1>TODO LIST</h1>
+            <h1>TODO LIST</h1> <h6>© Yuriy.Barbeu ASP.NET MVC</h6>
         </div>
             <div class="panel-body">
                 <table class="table">
                     <tr>                       
                         <td align="left">
                             @using (Html.BeginRouteForm("Default", new { action = "CreateTask", controller = "Lists" }))
-                            {                                   
-                                                                        
+                            {                                                                                                         
                                 @Html.TextBox("name")
                                 <input type="submit" class="btn btn-primary" value="Create" />
                             }
