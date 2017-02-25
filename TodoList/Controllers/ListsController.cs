@@ -22,20 +22,19 @@ namespace TodoList.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateTask(List<string> names)
+        public RedirectResult CreateTask(string name)
         {
-            foreach(string name in names)
+            if (!string.IsNullOrWhiteSpace(name))
             {
                 tbLists tmp = new tbLists();
                 tmp.cName = name;
                 tmp.isDone = false;
                 dbContext.tbLists.Add(tmp);
-            }
-           
-            dbContext.SaveChanges();
-            ModelState.Clear();
 
-            return View("Index", dbContext.tbLists.ToList());
+                dbContext.SaveChanges();
+            }
+            
+            return Redirect("/Lists/Index");
         }
 
         [HttpPost]
