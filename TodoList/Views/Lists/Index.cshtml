@@ -50,7 +50,11 @@
                                     @item.cName
                                 </td>
                                 <td>
-                                    <!-- TODO: button done -->
+                                    @using (Html.BeginRouteForm("Default", new { action = "Done", controller = "Lists" }))
+                                    {
+                                        @Html.Hidden("id", @item.id);                                                                         
+                                        <input type="submit" class="btn btn-success" value="✔"/>
+                                    }
                                 </td>
                                 <td >
                                     <!-- TODO: button delete -->

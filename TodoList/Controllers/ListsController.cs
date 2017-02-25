@@ -37,5 +37,14 @@ namespace TodoList.Controllers
 
             return View("Index", dbContext.tbLists.ToList());
         }
+
+        [HttpPost]
+        public RedirectResult Done(int id)
+        {        
+            dbContext.tbLists.Where(l => l.id == id).First().isDone = true;
+            dbContext.SaveChanges();
+
+            return Redirect("/Lists/Index");
+        }
     }
 }
