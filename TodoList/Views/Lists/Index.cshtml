@@ -21,39 +21,37 @@
             <h1>TODO LIST</h1>
         </div>
             <div class="panel-body">
-                @if (Model.Count != 0)
-                {
+                <table class="table">
+                    <tr>                       
+                        <td align="left">
+                            @using (Html.BeginRouteForm("Default", new { action = "CreateTask", controller = "Lists" }))
+                            {                                   
+                                                                        
+                                @Html.TextBox("name")
+                                <input type="submit" class="btn btn-primary" value="Create" />
+                            }
+                        </td>                                                        
+                    </tr>                                                                                                   
+                </table>  
+
+                <div class="panel-success">
+                    <div class="panel-heading text-center">
+                        <h2>Tasks</h2>
+                    </div>
+                </div>          
                     <table class="table">
-                        <tr>
-                            <td align="left">
-                                @using (Html.BeginRouteForm("Default", new { action = "CreateTask", controller = "Lists" }))
-                                {                                   
-                                    @Html.Label("Name");                                    
-                                    @Html.TextBox("name")
-                                    <input type="submit" class="btn btn-primary" value="+" />
-                                }
-                            </td>                                                        
-                        </tr>                        
-                        <tr>
-                            <td align="center">
-                                <h3>
-                                    Tasks
-                                </h3>
-                            </td>
-                        </tr>
-                       
                         @foreach (tbLists item in Model)
                         {
                             if (item.isDone == true) { continue; }
                             <tr>
-                                <td align="center">
-                                    @item.cName
+                                <td align="left" width="20100">
+                                    <h3>@item.cName</h3>                                    
                                 </td>
-                                <td align="right">
-                                    @using (Html.BeginRouteForm("Default", new { action = "Done", controller = "Lists" }))
+                                <td align="right" width="2000">
+                                    @using (Html.BeginRouteForm("Default", new { action = "DoneTrue", controller = "Lists" }))
                                     {
-                                        @Html.Hidden("id", @item.id)                                                                        
-                                        <input type="submit" class="btn btn-success" value="✔"/>
+                                        @Html.Hidden("id", @item.id)
+                                        <input type="submit" class="btn btn-success" value="✔" width="3040" />                                       
                                     }
                                 </td>
                                 <td align="left">
@@ -64,14 +62,39 @@
                                     }
                                 </td>
                             </tr>
-                            }
-                    </table>                   
-                }
-                else
-                {
-                    <h2>No Data</h2>
-                }          
-        </div>
+                        }
+                    </table>            
+                <div class="panel-warning">
+                    <div class="panel-heading text-center">
+                        <h2>Сompleted Tasks</h2>
+                    </div>
+                </div>   
+                    <table class="table">
+                        @foreach (tbLists item in Model)
+                        {
+                            if (item.isDone == false) { continue; }
+                            <tr>
+                                <td align="left" width="20100">
+                                    <h3>@item.cName</h3> 
+                                </td>
+                                <td align="right" width="2000">
+                                    @using (Html.BeginRouteForm("Default", new { action = "DoneFalse", controller = "Lists" }))
+                                    {
+                                        @Html.Hidden("id", @item.id)
+                                        <input type="submit" class="btn btn-warning" value="✔" />
+                                    }
+                                </td>
+                                <td align="left">
+                                    @using (Html.BeginRouteForm("Default", new { action = "DeleteTask", controller = "Lists" }))
+                                    {
+                                        @Html.Hidden("id", @item.id)
+                                        <input type="submit" class="btn btn-danger" value="X" />
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </table>                                       
+            </div>
     </div>
 </body>
 </html>

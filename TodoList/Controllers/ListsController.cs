@@ -38,7 +38,7 @@ namespace TodoList.Controllers
         }
 
         [HttpPost]
-        public RedirectResult Done(int id)
+        public RedirectResult DoneTrue(int id)
         {
             dbContext.tbLists.Where(l => l.id == id).First().isDone = true;
             dbContext.SaveChanges();
@@ -47,10 +47,23 @@ namespace TodoList.Controllers
         }
 
         [HttpPost]
+        public RedirectResult DoneFalse(int id)
+        {
+            dbContext.tbLists.Where(l => l.id == id).First().isDone = false;
+            dbContext.SaveChanges();
+
+            return Redirect("/Lists/Index");
+        }
+
+        [HttpPost]
         public RedirectResult DeleteTask(int id)
         {
-            dbContext.tbLists.Remove(dbContext.tbLists.Where(l => l.id == id).First());
-            dbContext.SaveChanges();
+            tbLists remove = dbContext.tbLists.Where(l => l.id == id).FirstOrDefault();
+            if (remove != null)
+            {
+                dbContext.tbLists.Remove(dbContext.tbLists.Where(l => l.id == id).First());
+                dbContext.SaveChanges();
+            }
 
             return Redirect("/Lists/Index");
         }
