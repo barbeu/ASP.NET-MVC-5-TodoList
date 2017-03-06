@@ -1,0 +1,106 @@
+﻿@using TodoList_v1.lib.Entity
+@using Microsoft.AspNet.Identity 
+@model List<tbLists>
+
+
+    <div class="panel-primary">
+        <div class="panel-heading">
+            <h2>Todo List.</h2>
+        </div>
+        @if (Session["id"] != null)
+        {
+            <div class="panel-body">
+                <table class="table">
+                    <tr>                       
+                        <td align="left">
+                            @using (Html.BeginRouteForm("Default", new { action = "CreateTask", controller = "Lists" }))
+                            {
+                                @Html.TextBox("nameCreate")
+                                <input type="submit" class="btn btn-primary" value="Create" onclick="createTask();" />
+                            }
+                        </td>  
+                        <td align="right" width="700">
+                            @using (Html.BeginRouteForm("Default", new { action = "RemoveTasks", controller = "Lists" }))
+                            {
+                                @Html.Hidden("boolean", true)
+                                <input type="submit" class="btn btn-warning" value="Remove completed tasks"/>
+                            }
+                        </td>
+                        <td align="left">
+                            @using (Html.BeginRouteForm("Default", new { action = "RemoveTasks", controller = "Lists" }))
+                            {
+                                @Html.Hidden("boolean", false)
+                                <input type="submit" class="btn btn-danger" value="Remove tasks" />
+                            }
+                        </td>                                                     
+                    </tr>                                                                                                   
+                </table>  
+
+                <div class="panel-success">
+                    <div class="panel-heading text-center">
+                        <h3>Tasks</h3>
+                    </div>
+                </div>          
+                    <table class="table">
+                        @foreach (tbLists item in Model)
+                        {
+                            if (item.isDone == true) { continue; }
+                            <tr>
+                                <td align="left" width="20100">
+                                    <h3>@item.cName</h3>                                    
+                                </td>
+                                <td align="right" width="2000">
+                                    @using (Html.BeginRouteForm("Default", new { action = "DoneTrue", controller = "Lists" }))
+                                    {
+                                        @Html.Hidden("id", @item.id)
+                                        <input type="submit" class="btn btn-success" value="✔" width="3040" />                                       
+                                    }
+                                </td>
+                                <td align="left">
+                                    @using (Html.BeginRouteForm("Default", new { action = "DeleteTask", controller = "Lists" }))
+                                    {
+                                        @Html.Hidden("id", @item.id)
+                                        <input type="submit" class="btn btn-danger" value="X" />
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </table>            
+                <div class="panel-warning">
+                    <div class="panel-heading text-center">
+                        <h3>Сompleted Tasks</h3>
+                    </div>
+                </div>   
+                    <table class="table">
+                        @foreach (tbLists item in Model)
+                        {
+                            if (item.isDone == false) { continue; }
+                            <tr>
+                                <td align="left" width="20100">
+                                    <h3>@item.cName</h3> 
+                                </td>
+                                <td align="right" width="2000">
+                                    @using (Html.BeginRouteForm("Default", new { action = "DoneFalse", controller = "Lists" }))
+                                    {
+                                        @Html.Hidden("id", @item.id)
+                                        <input type="submit" class="btn btn-warning" value="✔" />
+                                    }
+                                </td>
+                                <td align="left">
+                                    @using (Html.BeginRouteForm("Default", new { action = "DeleteTask", controller = "Lists" }))
+                                    {
+                                        @Html.Hidden("id", @item.id)
+                                        <input type="submit" class="btn btn-danger" value="X" />
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </table>                                       
+            </div>
+        }
+        else
+        {
+            <h2 class="alert">Autorization error.</h2>
+            <h2>@Html.ActionLink("Sign in.", "Login", "Auth")</h2>
+        }
+    </div>

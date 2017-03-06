@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dbTodoListModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tbLists">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cUserId" Type="Int32" />
+    <Property Name="cName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="isDone" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="tbUsers" Relationship="Self.FK_tbLists_tbUsers" FromRole="tbLists" ToRole="tbUsers" />
+  </EntityType>
+  <EntityType Name="tbUsers">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cLogin" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cPassword" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cToken" Type="Guid" />
+    <NavigationProperty Name="tbLists" Relationship="Self.FK_tbLists_tbUsers" FromRole="tbUsers" ToRole="tbLists" />
+  </EntityType>
+  <Association Name="FK_tbLists_tbUsers">
+    <End Role="tbUsers" Type="Self.tbUsers" Multiplicity="0..1" />
+    <End Role="tbLists" Type="Self.tbLists" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbUsers">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tbLists">
+        <PropertyRef Name="cUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="dbTodoListEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="tbLists" EntityType="Self.tbLists" />
+    <EntitySet Name="tbUsers" EntityType="Self.tbUsers" />
+    <AssociationSet Name="FK_tbLists_tbUsers" Association="Self.FK_tbLists_tbUsers">
+      <End Role="tbUsers" EntitySet="tbUsers" />
+      <End Role="tbLists" EntitySet="tbLists" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

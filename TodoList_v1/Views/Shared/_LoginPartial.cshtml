@@ -1,0 +1,19 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Session["id"] != null)
+{
+    <ul class="nav navbar-nav navbar-right">
+        @*<li>
+            @Html.ActionLink("Hello, " + (string)Session["name"] + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            @Html.ActionLink("Hello, " + (string)Session["name"] + "!", "Index", "Lists");
+        </li>*@
+        <li>@Html.ActionLink("Hello, " + (string)Session["name"] + "!", "Index", "Lists")</li>
+        <li>@Html.ActionLink("Exit", "Exit", "Auth")</li>
+    </ul>
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">      
+        <li>@Html.ActionLink("Create one", "Register", "Auth")</li>
+        <li>@Html.ActionLink("Sign in", "Login", "Auth")</li>
+    </ul>
+}

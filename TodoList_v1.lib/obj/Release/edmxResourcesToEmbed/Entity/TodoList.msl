@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище dbTodoListModelContainer" CdmEntityContainer="dbTodoListEntities">
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="dbTodoListModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbLists">
+      <EntityTypeMapping TypeName="dbTodoListModel.tbLists">
+        <MappingFragment StoreEntitySet="tbLists">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="cUserId" ColumnName="cUserId" />
+          <ScalarProperty Name="cName" ColumnName="cName" />
+          <ScalarProperty Name="isDone" ColumnName="isDone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbUsers">
+      <EntityTypeMapping TypeName="dbTodoListModel.tbUsers">
+        <MappingFragment StoreEntitySet="tbUsers">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="cLogin" ColumnName="cLogin" />
+          <ScalarProperty Name="cPassword" ColumnName="cPassword" />
+          <ScalarProperty Name="cToken" ColumnName="cToken" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
